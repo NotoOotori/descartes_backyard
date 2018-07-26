@@ -1,4 +1,4 @@
-# descartes_backyard
+# Descartes Backyard
 A harmonious place to witness my growth in programming.
 ___
 
