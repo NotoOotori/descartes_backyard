@@ -1,14 +1,15 @@
-"""The main file of 'Houtou Project'"""
+""" The main file of 'Houtou Project'"""
 import os
 import sys
 
 import pygame
 
+from player import Player
 from settings import Settings
 
 
 def run_game():
-    """main function"""
+    """ The main function"""
     # Initialize the game and create a screen object.
     os.environ['SDL_VIDEO_CENTERED'] = '1'
     pygame.init()
@@ -17,19 +18,23 @@ def run_game():
         (ai_settings.screen_width, ai_settings.screen_height))
     pygame.display.set_caption("Houtou Project")
 
+    # Create the player
+    player = Player(ai_settings, screen)
+
     # Start the main loop.
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
 
-        # 每次循环时都重绘屏幕
+        # Redraw the screen, each pass through the loop.
         screen.fill(ai_settings.bg_color)
+        player.blitme()
 
-        # 让最近绘制的屏幕可见
+        # Make the most recently drawn screen visible.
         pygame.display.flip()
 
-        # 控制每秒的帧数
+        # Control the frames per second
         pygame.time.Clock().tick(ai_settings.fps)
 
 # Run the game.
