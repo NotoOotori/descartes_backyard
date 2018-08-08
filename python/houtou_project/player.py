@@ -23,7 +23,8 @@ class Player():
         self.rect.bottom = self.screen_rect.bottom
 
         # Load the player's collision box
-        self.collision_box = Circle(self.image, (255, 255, 0), self.rect, 6)
+        self.collision_box = Circle(self.image, (255, 0, 0), (255, 255, 255),
+                                    self.rect, 5, 2)
 
     def blitme(self):
         """ Draw the player and her collision box at their current location."""
