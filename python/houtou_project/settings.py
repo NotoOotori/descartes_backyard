@@ -7,13 +7,15 @@ class Settings():
         self.screen_width, self.screen_height = (1024, 768)
         self.bg_color = (40, 40, 40)
 
-        # Set the path of player's image
+        # Set the path of player's image.
         self.player_image_path = 'images/player.png'
-        # Set the size of collision box
+        # Set the size and color of the collision box.
         self.collision_box_radius = 6
         self.collision_box_width = 3
-        # Set the player's speed
-        self.player_speed = 4
+        self.collision_box_color_edge = (255, 0, 0)
+        self.collision_box_color_inside = (255, 255, 255)
+        # Set the player's speed.
+        self.player_speed = 8
 
-        # Set the maxium frames per second
+        # Set the maxium frames per second.
         self.fps = 150
