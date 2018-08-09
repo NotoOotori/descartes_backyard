@@ -15,7 +15,9 @@ class Player():
         # Load the player's image, Rect object
         self.image = pygame.image.load(settings.player_image_path)
         self.image = self.image.convert_alpha()
-        self.image.fill((255, 255, 255, 127), None, pygame.BLEND_RGBA_MULT)
+        self.alpha = 127
+        self.image.fill((255, 255, 255, self.alpha), None,
+                        pygame.BLEND_RGBA_MULT)
         self.rect = self.image.get_rect()
         self.rect_origin = self.rect.copy()
         self.screen_rect = self.screen.get_rect()
