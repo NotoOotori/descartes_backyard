@@ -10,12 +10,11 @@ class Player():
         """ Initialize the player and set her initial position."""
         # Load the screen.
         self.screen = screen
-        self.settings = settings
 
         # Load the player's image, Rect object
         self.image = pygame.image.load(settings.player_image_path)
         self.image = self.image.convert_alpha()
-        self.alpha = 127
+        self.alpha = 237
         self.image.fill((255, 255, 255, self.alpha), None,
                         pygame.BLEND_RGBA_MULT)
         self.rect = self.image.get_rect()
@@ -32,11 +31,11 @@ class Player():
 
         # Load the collision box
         self.collision_box = Circle(self.image,
-                                    self.settings.collision_box_color_edge,
-                                    self.settings.collision_box_color_inside,
+                                    settings.collision_box_color_edge,
+                                    settings.collision_box_color_inside,
                                     self.rect_origin,
-                                    self.settings.collision_box_radius,
-                                    self.settings.collision_box_width)
+                                    settings.collision_box_radius,
+                                    settings.collision_box_width)
 
         # Draw the collision box to the player
         self.collision_box.blitme()
