@@ -1,6 +1,6 @@
 """ The Settings class"""
 class Settings():
-    """ All settings of the game"""
+    """ Store all settings of the game."""
     def __init__(self):
         """ Initialize the settings"""
         # Set the screen settings.
