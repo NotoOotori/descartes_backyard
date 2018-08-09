@@ -6,7 +6,7 @@ from circle import Circle
 
 class Player():
     """ The class player"""
-    def __init__(self, settings, screen):
+    def __init__(self, screen, settings):
         """ Initialize the player and set her initial position."""
         # Load the screen.
         self.screen = screen

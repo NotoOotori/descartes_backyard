@@ -21,7 +21,7 @@ def run_game():
     keys = Keys()
 
     # Create the player
-    player = Player(settings, screen)
+    player = Player(screen, settings)
 
     # Start the main loop.
     while True:
