@@ -9,3 +9,4 @@ class Keys():
         self.k_down = Key()
         self.k_left = Key()
         self.k_right = Key()
+        self.k_z = Key()

@@ -20,14 +20,15 @@ def run_game():
     pygame.display.set_caption("Houtou Project")
     keys = Keys()
 
-    # Create the player
+    # Create the player with her bullet group
     player = Player(screen, settings)
 
     # Start the main loop.
     while True:
         gf.check_events(player, keys)
         player.update()
-        gf.update_screen(screen, settings, player)
+        player.bullets.update()
+        gf.update_screen(screen, settings, player, player.bullets)
 
 # Run the game.
 run_game()

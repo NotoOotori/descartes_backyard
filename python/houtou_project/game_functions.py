@@ -34,6 +34,9 @@ def check_keydown_events(event, player, keys):
         keys.k_right.press()
         player.moving_right = True
         player.moving_left = False
+    elif event.key == pygame.K_z:
+        keys.k_z.press()
+        player.shooting = True
 
 def check_keyup_events(event, player, keys):
     """ Respond to key releases."""
@@ -57,11 +60,16 @@ def check_keyup_events(event, player, keys):
         player.moving_right = False
         if keys.k_left.hold:
             player.moving_left = True
+    elif event.key == pygame.K_z:
+        keys.k_z.release()
+        player.shooting = False
 
-def update_screen(screen, settings, player):
+def update_screen(screen, settings, player, bullets):
     """ Update images on the screen, and flip to the new screen."""
     # Redraw the screen, each pass through the loop.
     screen.fill(settings.bg_color)
+    for bullet in bullets:
+        bullet.blitme()
     player.blitme()
 
     # Make the most recently drawn screen visible.
