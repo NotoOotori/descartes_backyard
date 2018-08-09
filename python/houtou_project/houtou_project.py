@@ -1,9 +1,10 @@
 """ The main file of 'Houtou Project'"""
 import os
-import sys
 
 import pygame
 
+import game_functions as gf
+from keys import Keys
 from player import Player
 from settings import Settings
 
@@ -13,29 +14,20 @@ def run_game():
     # Initialize the game and create a screen object.
     os.environ['SDL_VIDEO_CENTERED'] = '1'
     pygame.init()
-    ai_settings = Settings()
+    settings = Settings()
     screen = pygame.display.set_mode(
-        (ai_settings.screen_width, ai_settings.screen_height))
+        (settings.screen_width, settings.screen_height))
     pygame.display.set_caption("Houtou Project")
+    keys = Keys()
 
     # Create the player
-    player = Player(ai_settings, screen)
+    player = Player(settings, screen)
 
     # Start the main loop.
     while True:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                sys.exit()
-
-        # Redraw the screen, each pass through the loop.
-        screen.fill(ai_settings.bg_color)
-        player.blitme()
-
-        # Make the most recently drawn screen visible.
-        pygame.display.flip()
-
-        # Control the frames per second
-        pygame.time.Clock().tick(ai_settings.fps)
+        gf.check_events(player, keys)
+        player.update()
+        gf.update_screen(settings, screen, player)
 
 # Run the game.
 run_game()

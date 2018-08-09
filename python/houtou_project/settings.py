@@ -9,6 +9,11 @@ class Settings():
 
         # Set the path of player's image
         self.player_image_path = 'images/player.png'
+        # Set the size of collision box
+        self.collision_box_radius = 6
+        self.collision_box_width = 3
+        # Set the player's speed
+        self.player_speed = 4
 
         # Set the maxium frames per second
         self.fps = 150
