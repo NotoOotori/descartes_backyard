@@ -27,7 +27,7 @@ def run_game():
     while True:
         gf.check_events(player, keys)
         player.update()
-        gf.update_screen(settings, screen, player)
+        gf.update_screen(screen, settings, player)
 
 # Run the game.
 run_game()

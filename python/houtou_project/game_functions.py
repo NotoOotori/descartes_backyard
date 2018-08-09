@@ -58,7 +58,7 @@ def check_keyup_events(event, player, keys):
         if keys.k_left.hold:
             player.moving_left = True
 
-def update_screen(settings, screen, player):
+def update_screen(screen, settings, player):
     """ Update images on the screen, and flip to the new screen."""
     # Redraw the screen, each pass through the loop.
     screen.fill(settings.bg_color)
