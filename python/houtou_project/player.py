@@ -15,7 +15,7 @@ class Player():
         # Load the player's image, Rect object
         self.image = pygame.image.load(settings.player_image_path)
         self.image = self.image.convert_alpha()
-        self.image.set_alpha(127)
+        self.image.fill((255, 255, 255, 127), None, pygame.BLEND_RGBA_MULT)
         self.rect = self.image.get_rect()
         self.rect_origin = self.rect.copy()
         self.screen_rect = self.screen.get_rect()
@@ -29,7 +29,9 @@ class Player():
         self.centery = float(self.rect.centery)
 
         # Load the collision box
-        self.collision_box = Circle(self.image, (255, 0, 0), (255, 255, 255),
+        self.collision_box = Circle(self.image,
+                                    self.settings.collision_box_color_edge,
+                                    self.settings.collision_box_color_inside,
                                     self.rect_origin,
                                     self.settings.collision_box_radius,
                                     self.settings.collision_box_width)
