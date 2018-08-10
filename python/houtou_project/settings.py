@@ -18,4 +18,4 @@ class Settings():
         self.player_speed = 8
 
         # Set the maxium frames per second.
-        self.fps = 150
+        self.fps = 120
