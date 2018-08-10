@@ -13,7 +13,7 @@ class Bullet(Sprite):
         self.screen = screen
 
         # Initialize the properties of the bullet.
-        self.image = bullet_settings.image
+        self.image = bullet_settings.image.copy()
         self.alpha = bullet_settings.alpha
         self.image.fill((255, 255, 255, self.alpha), None,
                         pygame.BLEND_RGBA_MULT)
