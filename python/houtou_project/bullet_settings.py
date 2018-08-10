@@ -1,7 +1,8 @@
 """ The class BulletSettings"""
 class BulletSettings():
     """ Store the settings of a bullet."""
-    def __init__(self, filename, alpha, speed):
+    def __init__(self, filename, alpha, speed, acceleration):
         self.filename = filename
         self.alpha = alpha
         self.speed = speed
+        self.acceleration = acceleration

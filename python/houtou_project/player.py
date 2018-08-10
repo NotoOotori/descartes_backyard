@@ -54,11 +54,12 @@ class Player():
 
         # Create the bullet group of the player.
         bullet_filename = 'images/bullet1.png'
-        bullet_alpha = 100
-        bullet_speed = 15
+        bullet_alpha = 63
+        bullet_speed = 10
+        bullet_acceleration = 0.5
         self.bullet_degree = 270
         self.bullet_settings = BulletSettings(bullet_filename, bullet_alpha,
-                                              bullet_speed)
+                                              bullet_speed, bullet_acceleration)
         self.bullets = Group()
 
         # Set the player's shooting flag

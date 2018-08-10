@@ -23,12 +23,13 @@ class Bullet(Sprite):
         self.centery = float(self.rect.centery)
         self.degree, self.speed, self.speedx, self.speedy = (None, None, None,
                                                              None)
-        self.set_speed(bullet_settings.speed, degree)
+        self.acceleration = bullet_settings.acceleration
+        self.set_speed(bullet_settings.speed, degree, 0)
 
-    def set_speed(self, speed, degree):
+    def set_speed(self, speed, degree, acceleration=0):
         """ Update bullet's absolute speed and the projection on axises.
             Also rotate the image if needed."""
-        self.speed = speed
+        self.speed = speed + acceleration
         self.degree = degree
         self.speedx = self.speed * cos(radians(self.degree))
         self.speedy = self.speed * sin(radians(self.degree))
@@ -36,10 +37,11 @@ class Bullet(Sprite):
         pygame.transform.rotate(self.image, degree)
 
     def update(self): # pylint: disable=W0221
-        """ Update the bullet's position."""
+        """ Update the bullet's position and accelerate the bullet."""
         self.centerx += self.speedx
         self.centery += self.speedy
         self.rect.center = self.centerx, self.centery
+        self.set_speed(self.speed, self.degree, self.acceleration)
 
     def blitme(self):
         """ Draw the bullet at its current location."""
