@@ -2,6 +2,7 @@
 import os
 
 import pygame
+from pygame.sprite import Sprite
 
 import game_functions as gf
 from keys import Keys
@@ -18,6 +19,8 @@ def run_game():
     screen = pygame.display.set_mode(
         (settings.screen_width, settings.screen_height))
     pygame.display.set_caption("Houtou Project")
+    screen_sprite = Sprite()
+    screen_sprite.rect = screen.get_rect()
     keys = Keys()
 
     # Create the player with her bullet group
@@ -27,7 +30,7 @@ def run_game():
     while True:
         gf.check_events(player, keys)
         player.update()
-        player.bullets.update()
+        gf.update_bullets(screen_sprite, player.bullets)
         gf.update_screen(screen, settings, player, player.bullets)
 
 # Run the game.

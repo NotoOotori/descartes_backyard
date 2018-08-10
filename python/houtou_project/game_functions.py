@@ -2,6 +2,7 @@
 import sys
 
 import pygame
+from pygame.sprite import collide_rect
 
 
 def check_events(player, keys):
@@ -63,6 +64,14 @@ def check_keyup_events(event, player, keys):
     elif event.key == pygame.K_z:
         keys.k_z.release()
         player.shooting = False
+
+def update_bullets(screen, bullets):
+    """Update the bullets' position and speed,
+       and remove bullets outside the screen."""
+    bullets.update()
+    for bullet in bullets.copy():
+        if not collide_rect(bullet, screen):
+            bullets.remove(bullet)
 
 def update_screen(screen, settings, player, bullets):
     """ Update images on the screen, and flip to the new screen."""
