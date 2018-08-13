@@ -33,15 +33,10 @@ class Player():
         self.centery = float(self.rect.centery)
 
         # Load the collision box.
-        self.collision_box = Circle(self.image,
-                                    settings.collision_box_color_edge,
+        self.collision_box = Circle(settings.collision_box_color_edge,
                                     settings.collision_box_color_inside,
-                                    self.rect_origin,
                                     settings.collision_box_radius,
                                     settings.collision_box_width)
-
-        # Draw the collision box to the player.
-        self.collision_box.blitme()
 
         # Set the player's moving flags.
         self.moving_up = False
@@ -90,5 +85,6 @@ class Player():
             self.bullets.add(new_bullet)
 
     def blitme(self):
-        """ Draw the player with her collision box at their current location."""
+        """ Draw the player without her collision box at their current
+            location."""
         self.screen.blit(self.image, self.rect)

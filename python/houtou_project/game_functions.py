@@ -80,6 +80,7 @@ def update_screen(screen, settings, player, bullets):
     for bullet in bullets:
         bullet.blitme()
     player.blitme()
+    player.collision_box.blitme(screen, player.rect.center)
 
     # Make the most recently drawn screen visible.
     pygame.display.flip()
