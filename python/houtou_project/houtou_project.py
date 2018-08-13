@@ -34,4 +34,5 @@ def run_game():
         gf.update_screen(screen, settings, player, player.bullets)
 
 # Run the game.
-run_game()
+if __name__ == '__main__':
+    run_game()
