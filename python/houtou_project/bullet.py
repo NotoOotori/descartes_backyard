@@ -34,7 +34,7 @@ class Bullet(Sprite):
         self.speedx = self.speed * cos(radians(self.degree))
         self.speedy = self.speed * sin(radians(self.degree))
         self.image = self.image_origin
-        pygame.transform.rotate(self.image, degree)
+        self.image = pygame.transform.rotate(self.image, 270 - degree)
 
     def update(self): # pylint: disable=W0221
         """ Update the bullet's position and accelerate the bullet."""
