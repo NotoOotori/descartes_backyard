@@ -62,6 +62,7 @@ class Player():
 
     def update(self):
         """ Update the player's position, based on movement flags.
+            Update the position of the collision box.
             Create new bullets, when the player is shooting."""
         # Update the float value of 'center'
         if self.moving_up and self.rect.top > self.screen_rect.top:
@@ -74,6 +75,9 @@ class Player():
             self.centerx += self.speed
         # Update the player's rect.
         self.rect.center = self.centerx, self.centery
+
+        # Update the position of the collision box
+        self.collision_box.update(self.rect.center)
 
         # Create new bullets at the center of the player.
         if self.shooting:

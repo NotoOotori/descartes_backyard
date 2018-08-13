@@ -21,6 +21,9 @@ class Bullet(Sprite):
         self.rect = self.image.get_rect()
         self.centerx = float(self.rect.centerx)
         self.centery = float(self.rect.centery)
+        # Initialize the mask.
+        self.mask = pygame.mask.from_surface(self.image, 1)
+        # Initialize speed related contents.
         self.degree, self.speed, self.speedx, self.speedy = (None, None, None,
                                                              None)
         self.acceleration = bullet_settings.acceleration
