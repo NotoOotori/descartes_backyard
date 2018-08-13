@@ -82,10 +82,7 @@ class Player():
         # Create new bullets at the center of the player.
         if self.shooting:
             new_bullet = Bullet(self.screen, self.bullet_settings,
-                                self.bullet_degree)
-            new_bullet.rect.center = self.rect.center
-            new_bullet.centerx = float(new_bullet.rect.centerx)
-            new_bullet.centery = float(new_bullet.rect.centery)
+                                self.rect.center, self.bullet_degree)
             self.bullets.add(new_bullet)
 
     def blitme(self):

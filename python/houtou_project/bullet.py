@@ -7,7 +7,7 @@ from pygame.sprite import Sprite
 
 class Bullet(Sprite):
     """ A bullet."""
-    def __init__(self, screen, bullet_settings, degree):
+    def __init__(self, screen, bullet_settings, center, degree):
         """ Create a bullet at specified location."""
         super().__init__()
         self.screen = screen
@@ -19,6 +19,7 @@ class Bullet(Sprite):
                         pygame.BLEND_RGBA_MULT)
         self.image_origin = self.image.copy()
         self.rect = self.image.get_rect()
+        self.rect.center = center
         self.centerx = float(self.rect.centerx)
         self.centery = float(self.rect.centery)
         # Initialize the mask.
