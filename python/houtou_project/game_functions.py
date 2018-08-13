@@ -84,6 +84,3 @@ def update_screen(screen, settings, player, bullets):
 
     # Make the most recently drawn screen visible.
     pygame.display.flip()
-
-    # Control the frames per second
-    pygame.time.Clock().tick(settings.fps)

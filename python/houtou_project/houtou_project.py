@@ -33,6 +33,9 @@ def run_game():
         gf.update_bullets(screen_sprite, player.bullets)
         gf.update_screen(screen, settings, player, player.bullets)
 
+        # Control the frames per second
+        pygame.time.Clock().tick(settings.fps)
+
 # Run the game.
 if __name__ == '__main__':
     run_game()
