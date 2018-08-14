@@ -86,6 +86,6 @@ class Player():
             self.bullets.add(new_bullet)
 
     def blitme(self):
-        """ Draw the player without her collision box at their current
+        """ Draw the player without her collision box at her current
             location."""
         self.screen.blit(self.image, self.rect)
