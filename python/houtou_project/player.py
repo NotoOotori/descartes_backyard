@@ -47,6 +47,9 @@ class Player():
         # Set the player's speed.
         self.speed = settings.player_speed
 
+        # Set the player's power.
+        self.power = 125
+
         # Create the bullet group of the player.
         bullet_filename = 'images/bullet1.png'
         bullet_alpha = 63
