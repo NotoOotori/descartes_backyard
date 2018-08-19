@@ -1,4 +1,4 @@
-""" The class Keys"""
+""" The classes Key and Keys"""
 class Key():
     """ Store the status of a key."""
     def __init__(self):
