@@ -1,11 +1,8 @@
 """ The class BulletSettings"""
-import pygame
-
-
 class BulletSettings():
     """ Store the settings of a bullet."""
-    def __init__(self, filename, alpha, speed, acceleration):
-        self.image = pygame.image.load(filename).convert_alpha()
+    def __init__(self, image, alpha, speed, acceleration=0):
+        self.image = image
         self.alpha = alpha
         self.speed = speed
         self.acceleration = acceleration

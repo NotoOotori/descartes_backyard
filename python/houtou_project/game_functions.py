@@ -1,5 +1,6 @@
 """ All functions used in the game"""
 import sys
+from copy import copy
 
 import pygame
 from pygame.sprite import collide_rect
@@ -65,21 +66,38 @@ def check_keyup_events(event, player, keys):
         keys.k_z.release()
         player.shooting = False
 
-def update_bullets(screen, bullets):
+def check_ticks(ticks, enemies, enemy_repo):
+    """ Post events based on the ticks."""
+    if ticks == 0:
+        enemies.append(copy(enemy_repo.bat_girl))
+    ticks += 1
+
+def get_bullets_list(player, enemies)->list:
+    """ Get the list of all bullets groups."""
+    bullets_list = [player.bullets]
+    for enemy in enemies:
+        bullets_list.append(enemy.bullets)
+    return bullets_list
+
+def update_bullets(screen, bullets_list):
     """Update the bullets' position and speed,
        and remove bullets outside the screen."""
-    bullets.update()
-    for bullet in bullets.copy():
-        if not collide_rect(bullet, screen):
-            bullets.remove(bullet)
+    for bullets in bullets_list:
+        bullets.update()
+        for bullet in bullets.copy():
+            if not collide_rect(bullet, screen):
+                bullets.remove(bullet)
 
-def update_screen(screen, settings, player, bullets):
+def update_screen(screen, settings, player, enemies, bullets_list):
     """ Update images on the screen, and flip to the new screen."""
     # Redraw the screen, each pass through the loop.
     screen.fill(settings.bg_color)
-    for bullet in bullets:
-        bullet.blitme()
     player.blitme()
+    for enemy in enemies:
+        enemy.blitme()
+    for bullets in bullets_list:
+        for bullet in bullets:
+            bullet.blitme()
     player.collision_box.blitme(screen)
 
     # Make the most recently drawn screen visible.

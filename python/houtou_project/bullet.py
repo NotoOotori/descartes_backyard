@@ -1,8 +1,8 @@
-""" The class Bullet"""
-from math import sin, cos, radians
+""" Store all classes related to bullet."""
+from math import atan2, cos, degrees, radians, sin
 
 import pygame
-from pygame.sprite import Sprite
+from pygame.sprite import Group, Sprite
 
 
 class Bullet(Sprite):
@@ -50,3 +50,27 @@ class Bullet(Sprite):
     def blitme(self):
         """ Draw the bullet at its current location."""
         self.screen.blit(self.image, self.rect)
+
+class GeneralSniperBullet(Group):
+    """A group that contains one row of the general sniper bullets."""
+    def __init__(self, screen, bullet_settings, enemy, player, way,
+                 degree_width):
+        super().__init__()
+        degree = degrees(atan2(player.rect.y - enemy.rect.y,
+                               player.rect.x - enemy.rect.x))
+        for i in range(way):
+            # If they are even-way sniper bullets.
+            if way % 2 == 0:
+                if i % 2 == 0:
+                    new_degree = degree + degree_width*(i + 1)/2
+                elif i % 2 == 1:
+                    new_degree = degree - degree_width*i/2
+            # If they are odd-way sniper bullets.
+            elif way % 2 == 1:
+                if i % 2 == 0:
+                    new_degree = degree + degree_width*i/2
+                elif i % 2 == 1:
+                    new_degree = degree - degree_width*(i + 1)/2
+            new_bullet = Bullet(screen, bullet_settings,
+                                enemy.rect.center, new_degree)
+            self.add(new_bullet)

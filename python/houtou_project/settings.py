@@ -15,7 +15,7 @@ class Settings():
         self.collision_box_color_edge = (255, 0, 0)
         self.collision_box_color_inside = (255, 255, 255)
         # Set the player's speed.
-        self.player_speed = 8
+        self.player_speed = 16
 
         # Set the maxium frames per second.
-        self.fps = 120
+        self.fps = 60

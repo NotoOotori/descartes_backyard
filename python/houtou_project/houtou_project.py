@@ -6,6 +6,7 @@ from pygame.sprite import Sprite
 from pygame.time import Clock
 
 import game_functions as gf
+from enemy_repository import EnemyRepo
 from keys import Keys
 from player import Player
 from settings import Settings
@@ -23,18 +24,37 @@ def run_game():
     screen_sprite = Sprite()
     screen_sprite.rect = screen.get_rect()
     keys = Keys()
-    clock = Clock()
 
-    # Create the player with her bullet group
+    # Create the player with her bullet group.
     player = Player(screen, settings)
+    # Create the list of enemies.
+    enemies = []
+    # Load the enemies.
+    enemy_repo = EnemyRepo(screen)
+
+    bullets_list = []
+
+    # Initialize the clock.
+    clock = Clock()
+    ticks = 0
 
     # Start the main loop.
     while True:
-        clock.tick(settings.fps)
         gf.check_events(player, keys)
+        gf.check_ticks(ticks, enemies, enemy_repo)
+        # Update the player and the enemies.
         player.update()
-        gf.update_bullets(screen_sprite, player.bullets)
-        gf.update_screen(screen, settings, player, player.bullets)
+        for enemy in enemies.copy():
+            if enemy.update(player):
+                enemies.remove(enemy)
+            enemy.check_ticks(player)
+        # Update the bullets.
+        bullets_list = gf.get_bullets_list(player, enemies)
+        gf.update_bullets(screen_sprite, bullets_list)
+        # Update the screen.
+        gf.update_screen(screen, settings, player, enemies, bullets_list)
+        clock.tick(settings.fps)
+        ticks += 1
 
 # Run the game.
 if __name__ == '__main__':

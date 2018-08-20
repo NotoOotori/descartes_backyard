@@ -51,12 +51,12 @@ class Player():
         self.power = 125
 
         # Create the bullet group of the player.
-        bullet_filename = 'images/bullet1.png'
+        bullet_image = pygame.image.load('images/bullet1.png').convert_alpha()
         bullet_alpha = 63
-        bullet_speed = 10
-        bullet_acceleration = 0.5
+        bullet_speed = 20
+        bullet_acceleration = 1
         self.bullet_degree = 270
-        self.bullet_settings = BulletSettings(bullet_filename, bullet_alpha,
+        self.bullet_settings = BulletSettings(bullet_image, bullet_alpha,
                                               bullet_speed, bullet_acceleration)
         self.bullets = Group()
 
