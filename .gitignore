@@ -1,3 +1,4 @@
 .vscode/
+.workspace/
 __pycache__/
 functions.txt
