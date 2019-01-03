@@ -1,4 +1,7 @@
 .vscode/
 .workspace/
 __pycache__/
+*.spec
+build/
+dist/
 functions.txt
