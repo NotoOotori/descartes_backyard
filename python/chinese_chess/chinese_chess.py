@@ -22,11 +22,13 @@ def main(argv):
     try:
         opts, _ = getopt.getopt(argv, 'hg:s:', ['help', 'gamestring=', 'state='])
     except getopt.GetoptError:
-        print(help)
+        sys.stdout.write(help)
+        sys.stdout.flush()
         sys.exit(1)
     for opt, arg in opts:
         if opt in ('-h', '--help'):
-            print(help_str)
+            sys.stdout.write(help_str)
+            sys.stdout.flush()
             sys.exit()
         elif opt in ('-g', '--gamestring'):
             kwargs['game_string'] = arg
@@ -487,6 +489,7 @@ class ChineseChess(tk.Tk):
         super().__init__()
         self._setup_widgets(**kwargs)
         self._bind_events()
+        self.kwargs = kwargs
 
     def _add_menu(self, menu):
         ''' Add the menu.'''
@@ -497,6 +500,10 @@ class ChineseChess(tk.Tk):
         self.protocol('WM_DELETE_WINDOW', self._on_closing)
 
     def _on_closing(self):
+        if "state" in self.kwargs.keys():
+            if self.kwargs["state"] != "normal":
+                self.destroy()
+                sys.exit(0)
         answer = askyesnocancel('Quit', 'Do you want to save the chess manual?')
         if answer is None:
             pass
@@ -544,7 +551,10 @@ class Images(dict):
     ''' Preload the images.'''
     def __init__(self):
         super().__init__()
-        dirname = os.path.dirname(os.path.abspath(__file__))
+        try:
+            dirname = sys._MEIPASS
+        except AttributeError:
+            dirname = os.path.dirname(os.path.abspath(__file__))
         self._load_images(dirname + '/resources', 'png')
 
     def _load_images(self, path, extension):
