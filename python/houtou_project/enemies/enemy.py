@@ -1,13 +1,13 @@
-""" The class Enemy
-    Note: Derived classes should override the Enemy.check_ticks()."""
+''' The class Enemy
+    Note: Derived classes should override the Enemy.check_ticks().'''
 import pygame
 from pygame.sprite import Group, collide_mask
 
 
 class Enemy():
-    """ The class Enemy"""
+    ''' The class Enemy'''
     def __init__(self, screen, image_path, center, hit_point):
-        """ Initialize the enemy and set her position."""
+        ''' Initialize the enemy and set her position.'''
         self.screen = screen
         self.image = pygame.image.load(image_path).convert_alpha()
         self.rect = self.image.get_rect()
@@ -22,7 +22,7 @@ class Enemy():
         self.ticks = 0
 
     def update(self, player)->bool:
-        """ Update the enemy's health point."""
+        ''' Update the enemy's health point.'''
         for bullet in player.bullets.copy():
             if collide_mask(self, bullet):
                 self.hit_point -= player.power
@@ -30,14 +30,14 @@ class Enemy():
         return self.hit_point <= 0
 
     def set_center(self, center):
-        """ Set the center of the enemy."""
+        ''' Set the center of the enemy.'''
         self.centerx, self.centery = center
         self.rect.center = center
 
     def check_ticks(self):
-        """ Post events based on the ticks."""
+        ''' Post events based on the ticks.'''
         self.ticks += 1
 
     def blitme(self):
-        """ Draw the enemy to the screen."""
+        ''' Draw the enemy to the screen.'''
         self.screen.blit(self.image, self.rect)

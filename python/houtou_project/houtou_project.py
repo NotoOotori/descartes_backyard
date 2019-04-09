@@ -1,4 +1,4 @@
-""" The main file of 'Houtou Project'"""
+''' The main file of Houtou Project'''
 import os
 
 import pygame
@@ -6,21 +6,21 @@ from pygame.sprite import Sprite
 from pygame.time import Clock
 
 import game_functions as gf
-from enemy_repository import EnemyRepo
+from enemies.enemy_repository import EnemyRepo
 from keys import Keys
 from player import Player
 from settings import Settings
 
 
 def run_game():
-    """ The main function"""
+    ''' The main function'''
     # Initialize the game and create a screen object.
     os.environ['SDL_VIDEO_CENTERED'] = '1'
     pygame.init()
     settings = Settings()
     screen = pygame.display.set_mode(
         (settings.screen_width, settings.screen_height))
-    pygame.display.set_caption("Houtou Project")
+    pygame.display.set_caption('Houtou Project')
     screen_sprite = Sprite()
     screen_sprite.rect = screen.get_rect()
     keys = Keys()

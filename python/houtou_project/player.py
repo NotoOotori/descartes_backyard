@@ -1,4 +1,4 @@
-"""The class Player"""
+'''The class Player'''
 import pygame
 from pygame.sprite import Group
 
@@ -8,9 +8,9 @@ from circle import Circle
 
 
 class Player():
-    """ The class player"""
+    ''' The class player'''
     def __init__(self, screen, settings):
-        """ Initialize the player and set her initial position."""
+        ''' Initialize the player and set her initial position.'''
         # Load the screen.
         self.screen = screen
 
@@ -51,7 +51,7 @@ class Player():
         self.power = 125
 
         # Create the bullet group of the player.
-        bullet_image = pygame.image.load('images/bullet1.png').convert_alpha()
+        bullet_image = pygame.image.load('resources/bullet1.png').convert_alpha()
         bullet_alpha = 63
         bullet_speed = 20
         bullet_acceleration = 1
@@ -64,9 +64,9 @@ class Player():
         self.shooting = False
 
     def update(self):
-        """ Update the player's position, based on movement flags.
+        ''' Update the player's position, based on movement flags.
             Update the position of the collision box.
-            Create new bullets, when the player is shooting."""
+            Create new bullets, when the player is shooting.'''
         # Update the float value of 'center'
         if self.moving_up and self.rect.top > self.screen_rect.top:
             self.centery -= self.speed
@@ -89,6 +89,6 @@ class Player():
             self.bullets.add(new_bullet)
 
     def blitme(self):
-        """ Draw the player without her collision box at her current
-            location."""
+        ''' Draw the player without her collision box at her current
+            location.'''
         self.screen.blit(self.image, self.rect)
