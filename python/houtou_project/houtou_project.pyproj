@@ -39,7 +39,9 @@
     <Folder Include="resources\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".editorconfig" />
     <Content Include=".pylintrc" />
+    <Content Include="requirements.txt" />
     <Content Include="resources\bullet1.png" />
     <Content Include="resources\player.bmp" />
     <Content Include="resources\player.png" />
