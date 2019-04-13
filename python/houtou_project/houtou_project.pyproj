@@ -11,6 +11,7 @@
     <OutputPath>.</OutputPath>
     <Name>houtou_project</Name>
     <RootNamespace>houtou_project</RootNamespace>
+    <InterpreterId>MSBuild|venv|$(MSBuildProjectFullPath)</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -24,7 +25,7 @@
     <Compile Include="enemies\bat_girl.py" />
     <Compile Include="bullet.py" />
     <Compile Include="bullet_settings.py" />
-    <Compile Include="circle.py" />
+    <Compile Include="shape.py" />
     <Compile Include="enemies\enemy.py" />
     <Compile Include="enemies\enemy_repository.py" />
     <Compile Include="game_functions.py" />
@@ -42,6 +43,17 @@
     <Content Include="resources\bullet1.png" />
     <Content Include="resources\player.bmp" />
     <Content Include="resources\player.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="venv\">
+      <Id>venv</Id>
+      <Version>3.7</Version>
+      <Description>venv (Python 3.7 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
