@@ -7,6 +7,8 @@ from pygame.sprite import Group, Sprite
 
 class Bullet(Sprite):
     ''' A bullet.'''
+    # TODO: Restruct Bullet class.
+    # New Bullet class should inherit from Sprite and Shape classes.
     def __init__(self, screen, bullet_settings, center, degree):
         ''' Create a bullet at specified location.'''
         super().__init__()
@@ -40,7 +42,7 @@ class Bullet(Sprite):
         self.image = self.image_origin
         self.image = pygame.transform.rotate(self.image, 270 - degree)
 
-    def update(self): # pylint: disable=W0221
+    def update(self, *args):
         ''' Update the bullet's position and accelerate the bullet.'''
         self.centerx += self.speedx
         self.centery += self.speedy

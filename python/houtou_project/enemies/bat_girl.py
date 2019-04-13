@@ -1,7 +1,7 @@
 ''' The class BatGirl'''
 from bullet import Bullet, GeneralSniperBullet
 from bullet_settings import BulletSettings
-from circle import Circle
+from shape import Circle
 from enemies.enemy import Enemy
 
 

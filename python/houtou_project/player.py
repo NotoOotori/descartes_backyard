@@ -4,7 +4,7 @@ from pygame.sprite import Group
 
 from bullet import Bullet
 from bullet_settings import BulletSettings
-from circle import Circle
+from shape import Circle
 
 
 class Player():

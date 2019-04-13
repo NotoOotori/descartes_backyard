@@ -5,9 +5,10 @@ from pygame.surface import Surface
 
 
 class ShapeMeta(type):
+    ''' The metaclass for Shape. '''
     def __call__(cls, *args, **kwargs):
         class_object = type.__call__(cls, *args, **kwargs)
-        class_object._check_required_attributes()
+        class_object.check_required_attributes()
         return class_object
 
 class Shape(metaclass=ShapeMeta):
@@ -18,7 +19,8 @@ class Shape(metaclass=ShapeMeta):
     mask = None
     rect = None
 
-    def _check_required_attributes(self):
+    def check_required_attributes(self):
+        ''' Raise error if required attributes are not implemented. '''
         if self.image is None:
             raise NotImplementedError(
                 'Subclass must define self.image attribute.')
@@ -29,8 +31,10 @@ class Shape(metaclass=ShapeMeta):
             raise NotImplementedError(
                 'Subclass must define self.rect attribute.')
 
-    def update(self, point: list):
-        ''' Update the position of the shape. '''
+    def update(self, center: list):
+        '''
+        Update the position of the shape by giving coordinate of the center.
+        '''
         raise NotImplementedError(
             "Subclass must define update method.")
 
@@ -65,10 +69,12 @@ class Circle(Shape):
         # Initialize the mask.
         self.mask = pygame.mask.from_surface(self.image, 1)
 
-    def update(self, center):
-        ''' Update the position of the circle.'''
+    def update(self, center: list):
+        '''
+        Update the position of the circle by giving coordinate of the center.
+        '''
         self.rect.center = center
 
-    def blitme(self, surface):
+    def blitme(self, surface: Surface):
         ''' Draw the circle to a Surface.'''
         surface.blit(self.image, self.rect)

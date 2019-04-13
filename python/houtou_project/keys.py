@@ -12,11 +12,17 @@ class Key():
         ''' Record the key release.'''
         self.hold = False
 
-class Keys():
+class Keys(dict):
     ''' Store the status of keys.'''
     def __init__(self):
-        self.k_up = Key()
-        self.k_down = Key()
-        self.k_left = Key()
-        self.k_right = Key()
-        self.k_z = Key()
+        super().__init__()
+        self["k_up"] = Key()
+        self["k_down"] = Key()
+        self["k_left"] = Key()
+        self["k_right"] = Key()
+        self["k_z"] = Key()
+
+    def __getattr__(self, name):
+        if name in self.keys():
+            return self[name]
+        raise AttributeError("Attribute {} not found in Keys.".format(name))
