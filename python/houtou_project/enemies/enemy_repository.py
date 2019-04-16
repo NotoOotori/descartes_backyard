@@ -1,9 +1,9 @@
-''' The class EnemyRepo'''
+""" The class EnemyRepo"""
 from enemies.bat_girl import BatGirl
 
 
 class EnemyRepo(dict):
-    ''' Store instances of all enemies. '''
+    """ Store instances of all enemies. """
     def __init__(self, screen):
         super().__init__()
         self["bat_girl"] = BatGirl(screen, 'resources/player.png',

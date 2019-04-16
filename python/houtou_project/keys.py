@@ -1,19 +1,19 @@
-''' The classes Key and Keys'''
+""" The classes Key and Keys"""
 class Key():
-    ''' Store the status of a key.'''
+    """ Store the status of a key."""
     def __init__(self):
         self.hold = False
 
     def press(self):
-        ''' Record the key press.'''
+        """ Record the key press."""
         self.hold = True
 
     def release(self):
-        ''' Record the key release.'''
+        """ Record the key release."""
         self.hold = False
 
 class Keys(dict):
-    ''' Store the status of keys.'''
+    """ Store the status of keys."""
     def __init__(self):
         super().__init__()
         self["k_up"] = Key()

@@ -1,4 +1,4 @@
-''' Store all classes related to bullet.'''
+""" Store all classes related to bullet."""
 from math import atan2, cos, degrees, radians, sin
 
 import pygame
@@ -6,11 +6,11 @@ from pygame.sprite import Group, Sprite
 
 
 class Bullet(Sprite):
-    ''' A bullet.'''
+    """ A bullet."""
     # TODO: Restruct Bullet class.
     # New Bullet class should inherit from Sprite and Shape classes.
     def __init__(self, screen, bullet_settings, center, degree):
-        ''' Create a bullet at specified location.'''
+        """ Create a bullet at specified location."""
         super().__init__()
         self.screen = screen
 
@@ -33,8 +33,8 @@ class Bullet(Sprite):
         self.set_speed(bullet_settings.speed, degree, 0)
 
     def set_speed(self, speed, degree, acceleration=0):
-        ''' Update bullet's absolute speed and the projection on axises.
-            Also rotate the image if needed.'''
+        """ Update bullet's absolute speed and the projection on axises.
+            Also rotate the image if needed."""
         self.speed = speed + acceleration
         self.degree = degree
         self.speedx = self.speed * cos(radians(self.degree))
@@ -43,18 +43,18 @@ class Bullet(Sprite):
         self.image = pygame.transform.rotate(self.image, 270 - degree)
 
     def update(self, *args):
-        ''' Update the bullet's position and accelerate the bullet.'''
+        """ Update the bullet's position and accelerate the bullet."""
         self.centerx += self.speedx
         self.centery += self.speedy
         self.rect.center = self.centerx, self.centery
         self.set_speed(self.speed, self.degree, self.acceleration)
 
     def blitme(self):
-        ''' Draw the bullet at its current location.'''
+        """ Draw the bullet at its current location."""
         self.screen.blit(self.image, self.rect)
 
 class GeneralSniperBullet(Group):
-    ''' A group that contains one row of the general sniper bullets.'''
+    """ A group that contains one row of the general sniper bullets."""
     def __init__(self, screen, bullet_settings, enemy, player, way,
                  degree_width):
         super().__init__()

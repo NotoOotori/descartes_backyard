@@ -1,4 +1,4 @@
-''' The class BatGirl'''
+""" The class BatGirl"""
 from bullet import Bullet, GeneralSniperBullet
 from bullet_settings import BulletSettings
 from shape import Circle
@@ -6,7 +6,7 @@ from enemies.enemy import Enemy
 
 
 class BatGirl(Enemy):
-    ''' The boss - bat girl!'''
+    """ The boss - bat girl!"""
     def __init__(self, screen, image_path, center, hit_point):
         super().__init__(screen, image_path, center, hit_point)
         self.bullet1_circle = Circle((25, 140, 255), (255, 255, 255), 3, 1)

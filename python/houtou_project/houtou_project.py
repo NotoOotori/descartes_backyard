@@ -1,4 +1,4 @@
-''' The main file of Houtou Project'''
+""" The main file of Houtou Project"""
 import os
 
 import pygame
@@ -13,7 +13,7 @@ from settings import Settings
 
 
 def run_game():
-    ''' The main function'''
+    """ The main function"""
     # Initialize the game and create a screen object.
     os.environ['SDL_VIDEO_CENTERED'] = '1'
     pygame.init()

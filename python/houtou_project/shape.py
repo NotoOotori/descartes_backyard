@@ -1,26 +1,31 @@
-'''The class Circle'''
+"""The class Circle"""
 import pygame
 import pygame.gfxdraw
+import pygame.mask
 from pygame.surface import Surface
 
 
 class ShapeMeta(type):
-    ''' The metaclass for Shape. '''
+    """ The metaclass for Shape. """
     def __call__(cls, *args, **kwargs):
         class_object = type.__call__(cls, *args, **kwargs)
         class_object.check_required_attributes()
         return class_object
 
 class Shape(metaclass=ShapeMeta):
-    ''' The base class for shapes which can be drawn to a Surface. '''
+    """ The base class for shapes which can be drawn to a Surface. """
     # pylint: disable=no-self-use
 
+    # TODO: Restruct Shape.
+    # Create universal __init__ method.
+
+    alpha = 255
     image = None
     mask = None
     rect = None
 
     def check_required_attributes(self):
-        ''' Raise error if required attributes are not implemented. '''
+        """ Raise error if required attributes are not implemented. """
         if self.image is None:
             raise NotImplementedError(
                 'Subclass must define self.image attribute.')
@@ -32,21 +37,21 @@ class Shape(metaclass=ShapeMeta):
                 'Subclass must define self.rect attribute.')
 
     def update(self, center: list):
-        '''
+        """
         Update the position of the shape by giving coordinate of the center.
-        '''
+        """
         raise NotImplementedError(
             "Subclass must define update method.")
 
     def blitme(self, surface: Surface):
-        ''' Draw the shape to a Surface.'''
+        """ Draw the shape to a Surface."""
         raise NotImplementedError(
             "Subclass must define blitme method.")
 
 class Circle(Shape):
-    ''' A Circle which can be drawn to a Surface.'''
+    """ A Circle which can be drawn to a Surface."""
     def __init__(self, color_edge, color_inside, radius, width):
-        ''' Initialize properties and the image of the circle.'''
+        """ Initialize properties and the image of the circle."""
         super().__init__()
         self.image = Surface((radius*2, radius*2), pygame.SRCALPHA)
         self.rect = self.image.get_rect()
@@ -70,11 +75,11 @@ class Circle(Shape):
         self.mask = pygame.mask.from_surface(self.image, 1)
 
     def update(self, center: list):
-        '''
+        """
         Update the position of the circle by giving coordinate of the center.
-        '''
+        """
         self.rect.center = center
 
     def blitme(self, surface: Surface):
-        ''' Draw the circle to a Surface.'''
+        """ Draw the circle to a Surface."""
         surface.blit(self.image, self.rect)

@@ -1,9 +1,9 @@
-''' The Settings class'''
+""" The Settings class"""
 class Settings():
-    ''' Store all settings of the game.'''
+    """ Store all settings of the game."""
     # TODO: Read settings from ini or json file.
     def __init__(self):
-        ''' Initialize the settings'''
+        """ Initialize the settings"""
         # Set the screen settings.
         self.screen_width, self.screen_height = (1024, 768)
         self.bg_color = (40, 40, 40)

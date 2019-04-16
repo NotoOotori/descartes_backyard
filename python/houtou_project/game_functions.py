@@ -1,4 +1,4 @@
-''' All functions used in the game'''
+""" All functions used in the game"""
 import sys
 from copy import copy
 
@@ -7,7 +7,7 @@ from pygame.sprite import collide_rect
 
 
 def check_events(player, keys):
-    ''' Respond to key events and mouse events.'''
+    """ Respond to key events and mouse events."""
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
@@ -17,7 +17,7 @@ def check_events(player, keys):
             check_keyup_events(event, player, keys)
 
 def check_keydown_events(event, player, keys):
-    ''' Respond to key presses.'''
+    """ Respond to key presses."""
     if event.key == pygame.K_ESCAPE:
         sys.exit()
     elif event.key == pygame.K_UP:
@@ -41,7 +41,7 @@ def check_keydown_events(event, player, keys):
         player.shooting = True
 
 def check_keyup_events(event, player, keys):
-    ''' Respond to key releases.'''
+    """ Respond to key releases."""
     if event.key == pygame.K_UP:
         keys.k_up.release()
         player.moving_up = False
@@ -67,21 +67,21 @@ def check_keyup_events(event, player, keys):
         player.shooting = False
 
 def check_ticks(ticks, enemies, enemy_repo):
-    ''' Post events based on the ticks.'''
+    """ Post events based on the ticks."""
     if ticks == 0:
         enemies.append(copy(enemy_repo.bat_girl))
     ticks += 1
 
 def get_bullets_list(player, enemies)->list:
-    ''' Get the list of all bullets groups.'''
+    """ Get the list of all bullets groups."""
     bullets_list = [player.bullets]
     for enemy in enemies:
         bullets_list.append(enemy.bullets)
     return bullets_list
 
 def update_bullets(screen, bullets_list):
-    '''Update the bullets' position and speed,
-       and remove bullets outside the screen.'''
+    """Update the bullets' position and speed,
+       and remove bullets outside the screen."""
     for bullets in bullets_list:
         bullets.update()
         for bullet in bullets.copy():
@@ -89,7 +89,7 @@ def update_bullets(screen, bullets_list):
                 bullets.remove(bullet)
 
 def update_screen(screen, settings, player, enemies, bullets_list):
-    ''' Update images on the screen, and flip to the new screen.'''
+    """ Update images on the screen, and flip to the new screen."""
     # Redraw the screen, each pass through the loop.
     screen.fill(settings.bg_color)
     player.blitme()
