@@ -9,7 +9,10 @@ class BatGirl(Enemy):
     """ The boss - bat girl!"""
     def __init__(self, screen, image_path, center, hit_point):
         super().__init__(screen, image_path, center, hit_point)
-        self.bullet1_circle = Circle((25, 140, 255), (255, 255, 255), 3, 1)
+        self.bullet1_circle = Circle(
+            color_edge=(25, 140, 255),
+            color_inside=(255, 255, 255),
+            radius=3, width=1)
         self.bullet1_settings = BulletSettings(self.bullet1_circle.image,
                                                255, 6)
 

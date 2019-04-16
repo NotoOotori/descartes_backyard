@@ -33,10 +33,11 @@ class Player():
         self.centery = float(self.rect.centery)
 
         # Load the collision box.
-        self.collision_box = Circle(settings.collision_box_color_edge,
-                                    settings.collision_box_color_inside,
-                                    settings.collision_box_radius,
-                                    settings.collision_box_width)
+        self.collision_box = Circle(
+            color_edge=settings.collision_box_color_edge,
+            color_inside=settings.collision_box_color_inside,
+            radius=settings.collision_box_radius,
+            width=settings.collision_box_width)
 
         # Set the player's moving flags.
         self.moving_up = False
