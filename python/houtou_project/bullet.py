@@ -1,78 +1,80 @@
 """ Store all classes related to bullet."""
-from math import atan2, cos, degrees, radians, sin
+from math import atan2, degrees
 
 import pygame
 from pygame.sprite import Group, Sprite
 
+from motion import UniformlyAcceleratedLinearMotion
+from shape import CircleShape
+
 
 class Bullet(Sprite):
-    """ A bullet."""
-    # TODO: Restruct Bullet class.
-    # New Bullet class should inherit from Sprite and Shape classes.
-    def __init__(self, screen, bullet_settings, center, degree):
-        """ Create a bullet at specified location."""
+    """ A circle bullet which moves linearly. """
+    def __init__(self, center, **kwargs):
+        """ Create a bullet at specified location.
+
+        Keyword arguments:
+        shape_type -- the class name of the shape
+        arguments for shape_type.__init__
+        motion_type -- the class name of the motion
+        arguments for motion_type.__init__
+        """
         super().__init__()
-        self.screen = screen
+
+        shape_type = kwargs["shape_type"]
+        motion_type = kwargs["motion_type"]
+
+        self.shape = shape_type(**kwargs)
+        self.motion = motion_type(**kwargs)
 
         # Initialize the properties of the bullet.
-        self.image = bullet_settings.image.copy()
-        self.alpha = bullet_settings.alpha
-        self.image.fill((255, 255, 255, self.alpha), None,
-                        pygame.BLEND_RGBA_MULT)
         self.image_origin = self.image.copy()
-        self.rect = self.image.get_rect()
         self.rect.center = center
         self.centerx = float(self.rect.centerx)
         self.centery = float(self.rect.centery)
-        # Initialize the mask.
-        self.mask = pygame.mask.from_surface(self.image, 1)
-        # Initialize speed related contents.
-        self.degree, self.speed, self.speedx, self.speedy = (None, None, None,
-                                                             None)
-        self.acceleration = bullet_settings.acceleration
-        self.set_speed(bullet_settings.speed, degree, 0)
 
-    def set_speed(self, speed, degree, acceleration=0):
-        """ Update bullet's absolute speed and the projection on axises.
-            Also rotate the image if needed."""
-        self.speed = speed + acceleration
-        self.degree = degree
-        self.speedx = self.speed * cos(radians(self.degree))
-        self.speedy = self.speed * sin(radians(self.degree))
-        self.image = self.image_origin
-        self.image = pygame.transform.rotate(self.image, 270 - degree)
+    def __getattr__(self, name):
+        for child in (self.shape, self.motion):
+            try:
+                return getattr(child, name)
+            except AttributeError:
+                pass
+        raise AttributeError('Attribute {} not found.'.format(name))
 
     def update(self, *args):
-        """ Update the bullet's position and accelerate the bullet."""
+        """ Update the bullet's position, speed and image. """
         self.centerx += self.speedx
         self.centery += self.speedy
         self.rect.center = self.centerx, self.centery
-        self.set_speed(self.speed, self.degree, self.acceleration)
+        self.update_speed()
+        self.image = pygame.transform.rotate(
+            self.image_origin, 270 - self.degree)
 
     def blitme(self):
         """ Draw the bullet at its current location."""
         self.screen.blit(self.image, self.rect)
 
-class GeneralSniperBullet(Group):
-    """ A group that contains one row of the general sniper bullets."""
-    def __init__(self, screen, bullet_settings, enemy, player, way,
-                 degree_width):
-        super().__init__()
-        degree = degrees(atan2(player.rect.y - enemy.rect.y,
-                               player.rect.x - enemy.rect.x))
-        for i in range(way):
-            # If they are even-way sniper bullets.
-            if way % 2 == 0:
-                if i % 2 == 0:
-                    new_degree = degree + degree_width*(i + 1)/2
-                elif i % 2 == 1:
-                    new_degree = degree - degree_width*i/2
-            # If they are odd-way sniper bullets.
-            elif way % 2 == 1:
-                if i % 2 == 0:
-                    new_degree = degree + degree_width*i/2
-                elif i % 2 == 1:
-                    new_degree = degree - degree_width*(i + 1)/2
-            new_bullet = Bullet(screen, bullet_settings,
-                                enemy.rect.center, new_degree)
-            self.add(new_bullet)
+# class GeneralSniperBullet(Group):
+#     """ A group that contains one row of the general sniper bullets."""
+#     # TODO: Refactor __init__.
+#     def __init__(self, screen, bullet_settings, enemy, player, way,
+#                  degree_width):
+#         super().__init__()
+#         degree = degrees(atan2(player.rect.y - enemy.rect.y,
+#                                player.rect.x - enemy.rect.x))
+#         for i in range(way):
+#             # If they are even-way sniper bullets.
+#             if way % 2 == 0:
+#                 if i % 2 == 0:
+#                     new_degree = degree + degree_width*(i + 1)/2
+#                 elif i % 2 == 1:
+#                     new_degree = degree - degree_width*i/2
+#             # If they are odd-way sniper bullets.
+#             elif way % 2 == 1:
+#                 if i % 2 == 0:
+#                     new_degree = degree + degree_width*i/2
+#                 elif i % 2 == 1:
+#                     new_degree = degree - degree_width*(i + 1)/2
+#             new_bullet = Bullet(screen, bullet_settings,
+#                                 enemy.rect.center, new_degree)
+#             self.add(new_bullet)

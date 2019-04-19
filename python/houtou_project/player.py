@@ -3,8 +3,8 @@ import pygame
 from pygame.sprite import Group
 
 from bullet import Bullet
-from bullet_settings import BulletSettings
-from shape import Circle
+from motion import UniformlyAcceleratedLinearMotion
+from shape import CircleShape, ImageShape
 
 
 class Player():
@@ -33,11 +33,13 @@ class Player():
         self.centery = float(self.rect.centery)
 
         # Load the collision box.
-        self.collision_box = Circle(
+        self.collision_box = CircleShape(
+            alpha=255,
             color_edge=settings.collision_box_color_edge,
             color_inside=settings.collision_box_color_inside,
             radius=settings.collision_box_radius,
-            width=settings.collision_box_width)
+            width=settings.collision_box_width,
+            screen=self.screen)
 
         # Set the player's moving flags.
         self.moving_up = False
@@ -51,14 +53,26 @@ class Player():
         # Set the player's power.
         self.power = 125
 
-        # Create the bullet group of the player.
-        bullet_image = pygame.image.load('resources/bullet1.png').convert_alpha()
+        # Set the kwargs of the bullets.
         bullet_alpha = 63
+        bullet_image = pygame.image.load('resources/bullet1.png').convert_alpha()
+        bullet_image.fill(
+            (255, 255, 255, bullet_alpha), None, pygame.BLEND_RGBA_MULT)
         bullet_speed = 20
         bullet_acceleration = 1
-        self.bullet_degree = 270
-        self.bullet_settings = BulletSettings(bullet_image, bullet_alpha,
-                                              bullet_speed, bullet_acceleration)
+        bullet_degree = 270
+        bullet_shape_kwargs = {
+            'shape_type': ImageShape,
+            'image': bullet_image,
+            'screen': self.screen}
+        bullet_motion_kwargs = {
+            'motion_type': UniformlyAcceleratedLinearMotion,
+            'speed': bullet_speed,
+            'acceleration': bullet_acceleration,
+            'degree': bullet_degree}
+        self.bullet_kwargs = {**bullet_shape_kwargs, **bullet_motion_kwargs}
+
+        # Create the bullet group of the player.
         self.bullets = Group()
 
         # Set the player's shooting flag
@@ -84,9 +98,9 @@ class Player():
         self.collision_box.update(self.rect.center)
 
         # Create new bullets at the center of the player.
+        # TODO: PictureBullet
         if self.shooting:
-            new_bullet = Bullet(self.screen, self.bullet_settings,
-                                self.rect.center, self.bullet_degree)
+            new_bullet = Bullet(self.rect.center, **self.bullet_kwargs)
             self.bullets.add(new_bullet)
 
     def blitme(self):

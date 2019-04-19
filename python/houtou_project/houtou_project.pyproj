@@ -24,7 +24,9 @@
   <ItemGroup>
     <Compile Include="enemies\bat_girl.py" />
     <Compile Include="bullet.py" />
-    <Compile Include="bullet_settings.py" />
+    <Compile Include="motion.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="shape.py" />
     <Compile Include="enemies\enemy.py" />
     <Compile Include="enemies\enemy_repository.py" />
