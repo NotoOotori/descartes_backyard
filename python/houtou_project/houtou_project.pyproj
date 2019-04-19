@@ -22,6 +22,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="constants.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="enemies\bat_girl.py" />
     <Compile Include="bullet.py" />
     <Compile Include="motion.py">

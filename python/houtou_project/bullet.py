@@ -21,8 +21,8 @@ class Bullet(Sprite):
         """
         super().__init__()
 
-        shape_type = kwargs["shape_type"]
-        motion_type = kwargs["motion_type"]
+        shape_type = globals()[kwargs["shape_type"]]
+        motion_type = globals()[kwargs["motion_type"]]
 
         self.shape = shape_type(**kwargs)
         self.motion = motion_type(**kwargs)

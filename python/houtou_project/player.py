@@ -3,22 +3,22 @@ import pygame
 from pygame.sprite import Group
 
 from bullet import Bullet
+from constants import *
 from motion import UniformlyAcceleratedLinearMotion
 from shape import CircleShape, ImageShape
 
 
 class Player():
     """ The class player"""
-    def __init__(self, screen, settings):
+    def __init__(self, screen):
         """ Initialize the player and set her initial position."""
         # Load the screen.
         self.screen = screen
 
         # Load the player's image and Rect object.
-        self.image = pygame.image.load(settings.player_image_path)
+        self.image = pygame.image.load(PLAYER_IMAGE_PATH)
         self.image = self.image.convert_alpha()
-        self.alpha = 237
-        self.image.fill((255, 255, 255, self.alpha), None,
+        self.image.fill((255, 255, 255, PLAYER_IMAGE_ALPHA), None,
                         pygame.BLEND_RGBA_MULT)
         self.rect = self.image.get_rect()
         self.rect_origin = self.rect.copy()
@@ -35,10 +35,10 @@ class Player():
         # Load the collision box.
         self.collision_box = CircleShape(
             alpha=255,
-            color_edge=settings.collision_box_color_edge,
-            color_inside=settings.collision_box_color_inside,
-            radius=settings.collision_box_radius,
-            width=settings.collision_box_width,
+            color_edge=PLAYER_COLLISION_BOX_COLOR_EDGE,
+            color_inside=PLAYER_COLLISION_BOX_COLOR_INSIDE,
+            radius=PLAYER_COLLISION_BOX_RADIUS,
+            width=PLAYER_COLLISION_BOX_WIDTH,
             screen=self.screen)
 
         # Set the player's moving flags.
@@ -48,29 +48,21 @@ class Player():
         self.moving_right = False
 
         # Set the player's speed.
-        self.speed = settings.player_speed
+        self.speed = PLAYER_SPEED
 
         # Set the player's power.
         self.power = 125
 
         # Set the kwargs of the bullets.
-        bullet_alpha = 63
-        bullet_image = pygame.image.load('resources/bullet1.png').convert_alpha()
+        bullet_image = pygame.image.load(PLAYER_BULLET_IMAGE_PATH).convert_alpha()
         bullet_image.fill(
-            (255, 255, 255, bullet_alpha), None, pygame.BLEND_RGBA_MULT)
-        bullet_speed = 20
-        bullet_acceleration = 1
-        bullet_degree = 270
+            (255, 255, 255, PLAYER_BULLET_IMAGE_ALPHA), None, pygame.BLEND_RGBA_MULT)
         bullet_shape_kwargs = {
-            'shape_type': ImageShape,
+            'shape_type': 'ImageShape',
             'image': bullet_image,
             'screen': self.screen}
-        bullet_motion_kwargs = {
-            'motion_type': UniformlyAcceleratedLinearMotion,
-            'speed': bullet_speed,
-            'acceleration': bullet_acceleration,
-            'degree': bullet_degree}
-        self.bullet_kwargs = {**bullet_shape_kwargs, **bullet_motion_kwargs}
+        self.bullet_kwargs = {
+            **bullet_shape_kwargs, **PLAYER_BULLET_MOTION_KWARGS}
 
         # Create the bullet group of the player.
         self.bullets = Group()
@@ -98,7 +90,6 @@ class Player():
         self.collision_box.update(self.rect.center)
 
         # Create new bullets at the center of the player.
-        # TODO: PictureBullet
         if self.shooting:
             new_bullet = Bullet(self.rect.center, **self.bullet_kwargs)
             self.bullets.add(new_bullet)

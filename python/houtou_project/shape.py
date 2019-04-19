@@ -75,7 +75,7 @@ class ImageShape(Shape):
         """ Initialize properties and the image of the circle.
 
         Keyword arguments:
-        image -- 
+        image --
         screen -- (inherited)
         """
         # pylint: disable=useless-super-delegation

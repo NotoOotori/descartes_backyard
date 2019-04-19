@@ -26,7 +26,7 @@ def run_game():
     keys = Keys()
 
     # Create the player with her bullet group.
-    player = Player(screen, settings)
+    player = Player(screen)
     # Create the list of enemies.
     enemies = []
     # Load the enemies.

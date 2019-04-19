@@ -22,14 +22,14 @@ class BatGirl(Enemy):
         if self.ticks % 30 == 0:
             new_bullet = Bullet(
                 self.rect.center,
-                shape_type=CircleShape,
+                shape_type='CircleShape',
                 alpha=255,
                 color_edge=(25, 140, 255),
                 color_inside=(255, 255, 255),
                 radius=3,
                 width=1,
                 screen=self.screen,
-                motion_type=UniformlyAcceleratedLinearMotion,
+                motion_type='UniformlyAcceleratedLinearMotion',
                 speed=6,
                 acceleration=0,
                 degree=90)
