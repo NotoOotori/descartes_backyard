@@ -1,6 +1,6 @@
 # Descartes Backyard
 A harmonious place to witness my growth in programming.
-___
+* * *
 
 _Updated 2018-7-27_
 
